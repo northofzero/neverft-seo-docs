@@ -1,0 +1,54 @@
+site_name: NeverFullTime Documentation
+site_description: Technical documentation for NeverFullTime web application and Sanity CMS integration
+site_url: https://northofzero.github.io/neverfulltime-web/
+
+
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - search.highlight
+    - search.share
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Sanity Integration: integration/sanity-integration.md
+  - Routing & Pages: integration/routing-and-pages.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+plugins:
+  - search
