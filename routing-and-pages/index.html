@@ -1,0 +1,973 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Technical documentation for NeverFullTime web application and Sanity CMS integration">
+      
+      
+      
+        <link rel="canonical" href="https://northofzero.github.io/neverft-seo-docs/routing-and-pages/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.11">
+    
+    
+      
+        <title>NeverFullTime Routing & Pages Architecture - NeverFullTime Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a6bdf11c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#neverfulltime-routing-pages-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="NeverFullTime Documentation" class="md-header__button md-logo" aria-label="NeverFullTime Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NeverFullTime Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NeverFullTime Routing & Pages Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../integration/sanity-integration/" class="md-tabs__link">
+      Sanity Integration
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../integration/routing-and-pages/" class="md-tabs__link">
+      Routing & Pages
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="NeverFullTime Documentation" class="md-nav__button md-logo" aria-label="NeverFullTime Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    NeverFullTime Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/sanity-integration/" class="md-nav__link">
+        Sanity Integration
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/routing-and-pages/" class="md-nav__link">
+        Routing & Pages
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#routing-structure-overview" class="md-nav__link">
+    Routing Structure Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-pages" class="md-nav__link">
+    Global Pages (/)
+  </a>
+  
+    <nav class="md-nav" aria-label="Global Pages (/)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#homepage-indexjs" class="md-nav__link">
+    Homepage (/index.js)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blog-listing-blogindexjsx" class="md-nav__link">
+    Blog Listing (/blog/index.jsx)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#individual-blog-posts-blogslugjsx" class="md-nav__link">
+    Individual Blog Posts (/blog/[...slug].jsx)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-pages" class="md-nav__link">
+    Feature Pages
+  </a>
+  
+    <nav class="md-nav" aria-label="Feature Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feature-pricingjsx" class="md-nav__link">
+    /feature-pricing.jsx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-play-soccer-gamesjsx" class="md-nav__link">
+    /feature-play-soccer-games.jsx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-how-it-worksjs" class="md-nav__link">
+    /feature-how-it-works.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-host-soccer-gamesjs" class="md-nav__link">
+    /feature-host-soccer-games.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soccer-venuesindexjsx" class="md-nav__link">
+    /soccer-venues/index.jsx
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#country-specific-pages-country" class="md-nav__link">
+    Country-Specific Pages (/[country])
+  </a>
+  
+    <nav class="md-nav" aria-label="Country-Specific Pages (/[country])">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#country-homepage-countryindexjs" class="md-nav__link">
+    Country Homepage (/[country]/index.js)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#country-blog-listing-countryblogindexjsx" class="md-nav__link">
+    Country Blog Listing (/[country]/blog/index.jsx)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#country-blog-posts-countryblogslugjsx" class="md-nav__link">
+    Country Blog Posts (/[country]/blog/[...slug].jsx)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#country-feature-pages" class="md-nav__link">
+    Country Feature Pages
+  </a>
+  
+    <nav class="md-nav" aria-label="Country Feature Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#countryfeature-pricingjsx" class="md-nav__link">
+    /{country}/feature-pricing.jsx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#countryfeature-play-soccer-gamesjsx" class="md-nav__link">
+    /{country}/feature-play-soccer-games.jsx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#countryfeature-how-it-worksjs" class="md-nav__link">
+    /{country}/feature-how-it-works.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#countryfeature-host-soccer-gamesjs" class="md-nav__link">
+    /{country}/feature-host-soccer-games.js
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#countrysoccer-venuesindexjsx" class="md-nav__link">
+    /{country}/soccer-venues/index.jsx
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#location-based-pages-countrycity" class="md-nav__link">
+    Location-Based Pages (/[country]/[city])
+  </a>
+  
+    <nav class="md-nav" aria-label="Location-Based Pages (/[country]/[city])">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#city-venues-listing-countrycityvenuesindexjsx" class="md-nav__link">
+    City Venues Listing (/[country]/[city]/venues/index.jsx)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#individual-venue-pages-countrycityvenuespitchjsx" class="md-nav__link">
+    Individual Venue Pages (/[country]/[city]/venues/[pitch].jsx)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static-generation-strategy" class="md-nav__link">
+    Static Generation Strategy
+  </a>
+  
+    <nav class="md-nav" aria-label="Static Generation Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getstaticpaths" class="md-nav__link">
+    getStaticPaths
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getstaticprops" class="md-nav__link">
+    getStaticProps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seo-internationalization" class="md-nav__link">
+    SEO &amp; Internationalization
+  </a>
+  
+    <nav class="md-nav" aria-label="SEO &amp; Internationalization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-pages_1" class="md-nav__link">
+    Global Pages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#country-pages" class="md-nav__link">
+    Country Pages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blog-posts" class="md-nav__link">
+    Blog Posts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-summary" class="md-nav__link">
+    Data Flow Summary
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Flow Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#homepage-flow" class="md-nav__link">
+    Homepage Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blog-post-flow" class="md-nav__link">
+    Blog Post Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-generation-flow" class="md-nav__link">
+    Static Generation Flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#excluded-pages-not-in-sitemap" class="md-nav__link">
+    Excluded Pages (Not in Sitemap)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-routing-principles" class="md-nav__link">
+    Key Routing Principles
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="neverfulltime-routing-pages-architecture">NeverFullTime Routing &amp; Pages Architecture<a class="headerlink" href="#neverfulltime-routing-pages-architecture" title="Permanent link">&para;</a></h1>
+<p>This document explains the page structure, routing system, and Sanity data usage across the NeverFullTime web application.</p>
+<h2 id="routing-structure-overview">Routing Structure Overview<a class="headerlink" href="#routing-structure-overview" title="Permanent link">&para;</a></h2>
+<p>The application uses <strong>country-based routing</strong> with two main levels:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/ (Global)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── Home Page (/)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── Blog Listing (/blog)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── Blog Posts (/blog/[...slug])
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── Soccer Venues (/soccer-venues)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── Feature Pricing (/feature-pricing)
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├── Feature Play Soccer Games (/feature-play-soccer-games)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── Feature How It Works (/feature-how-it-works)
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└── Feature Host Soccer Games (/feature-host-soccer-games)
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>/[country] (Country-specific)
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>├── Country Home Page (/[country])
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>├── Country Blog Listing (/[country]/blog)
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>├── Country Blog Posts (/[country]/blog/[...slug])
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>├── Country Soccer Venues (/[country]/soccer-venues)
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>├── Country Feature Pricing (/[country]/feature-pricing)
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>├── Country Feature Play Soccer Games (/[country]/feature-play-soccer-games)
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>├── Country Feature How It Works (/[country]/feature-how-it-works)
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>├── Country Feature Host Soccer Games (/[country]/feature-host-soccer-games)
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>├── City Venues Listing (/[country]/[city]/venues)
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>└── Individual Venue Pages (/[country]/[city]/venues/[pitch])
+</span></code></pre></div>
+<p><strong>Examples of actual routes:</strong>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Global:
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── /
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── /blog
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── /blog/how-to-host-a-pickup-soccer-game
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>├── /soccer-venues
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>├── /feature-pricing
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>├── /feature-play-soccer-games
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>├── /feature-how-it-works
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>└── /feature-host-soccer-games
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Country-specific (Canada example):
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>├── /ca
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>├── /ca/blog
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>├── /ca/blog/how-to-host-a-pickup-soccer-game
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>├── /ca/soccer-venues
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>├── /ca/feature-pricing
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>├── /ca/feature-play-soccer-games
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>├── /ca/feature-how-it-works
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>├── /ca/feature-host-soccer-games
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>├── /ca/toronto/venues (City venues listing)
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>└── /ca/toronto/venues/cn-tower-sports-complex (Individual venue)
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>Location-based (Bosnia example from your URLs):
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>├── /ba/rio-de-janeiro/venues (City venues listing)
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>└── /ba/rio-de-janeiro/venues/ballsports-polson-pier (Individual venue)
+</span></code></pre></div></p>
+<h2 id="global-pages">Global Pages (<code>/</code>)<a class="headerlink" href="#global-pages" title="Permanent link">&para;</a></h2>
+<h3 id="homepage-indexjs">Homepage (<code>/index.js</code>)<a class="headerlink" href="#homepage-indexjs" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/</code>
+<strong>Purpose:</strong> Main landing page with global content
+<strong>Sanity Data Used:</strong>
+- Recent blog posts for stories section
+- User testimonials for social proof<br />
+- Featured FAQs for help section
+- Countries and cities for navigation</p>
+<p><strong>Components:</strong>
+- <code>GlobalSEO</code> - Generates hreflang for all countries (language: 'en')
+- <code>RootMetaData</code> - Global meta tags
+- <code>Landing</code> - Main content component</p>
+<hr />
+<h3 id="blog-listing-blogindexjsx">Blog Listing (<code>/blog/index.jsx</code>)<a class="headerlink" href="#blog-listing-blogindexjsx" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/blog</code>
+<strong>Purpose:</strong> Global blog listing page
+<strong>Sanity Data Used:</strong>
+- All published blog posts
+- Related FAQs
+- Countries/cities for navigation</p>
+<hr />
+<h3 id="individual-blog-posts-blogslugjsx">Individual Blog Posts (<code>/blog/[...slug].jsx</code>)<a class="headerlink" href="#individual-blog-posts-blogslugjsx" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/blog/{slug}</code>
+<strong>Purpose:</strong> Global blog post pages
+<strong>Sanity Data Used:</strong>
+- Specific blog post content
+- Related articles
+- Related FAQs
+- Countries/cities data</p>
+<p><strong>Components:</strong>
+- <code>SimpleSEO</code> - Blog-specific SEO with hreflang based on blog.countries and blog.language</p>
+<hr />
+<h3 id="feature-pages">Feature Pages<a class="headerlink" href="#feature-pages" title="Permanent link">&para;</a></h3>
+<p><strong>Routes &amp; Data:</strong></p>
+<h4 id="feature-pricingjsx"><code>/feature-pricing.jsx</code><a class="headerlink" href="#feature-pricingjsx" title="Permanent link">&para;</a></h4>
+<p><strong>Sanity Data:</strong> None (static content)
+<strong>Purpose:</strong> Pricing information and plans</p>
+<h4 id="feature-play-soccer-gamesjsx"><code>/feature-play-soccer-games.jsx</code><a class="headerlink" href="#feature-play-soccer-gamesjsx" title="Permanent link">&para;</a></h4>
+<p><strong>Sanity Data:</strong> None (static content)
+<strong>Purpose:</strong> Feature showcase for playing games</p>
+<h4 id="feature-how-it-worksjs"><code>/feature-how-it-works.js</code><a class="headerlink" href="#feature-how-it-worksjs" title="Permanent link">&para;</a></h4>
+<p><strong>Sanity Data:</strong> None (static content) 
+<strong>Purpose:</strong> Explanation of platform functionality</p>
+<h4 id="feature-host-soccer-gamesjs"><code>/feature-host-soccer-games.js</code><a class="headerlink" href="#feature-host-soccer-gamesjs" title="Permanent link">&para;</a></h4>
+<p><strong>Sanity Data:</strong> None (static content)
+<strong>Purpose:</strong> Feature showcase for hosting games</p>
+<h4 id="soccer-venuesindexjsx"><code>/soccer-venues/index.jsx</code><a class="headerlink" href="#soccer-venuesindexjsx" title="Permanent link">&para;</a></h4>
+<p><strong>Sanity Data:</strong> None (static content)
+<strong>Purpose:</strong> Information about venue features</p>
+<hr />
+<h2 id="country-specific-pages-country">Country-Specific Pages (<code>/[country]</code>)<a class="headerlink" href="#country-specific-pages-country" title="Permanent link">&para;</a></h2>
+<h3 id="country-homepage-countryindexjs">Country Homepage (<code>/[country]/index.js</code>)<a class="headerlink" href="#country-homepage-countryindexjs" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/{country}</code>
+<strong>Purpose:</strong> Country-specific landing page
+<strong>Sanity Data Used:</strong>
+- Recent blogs for stories
+- User testimonials<br />
+- FAQs for help section
+- Country validation and data fetching</p>
+<p><strong>Components:</strong>
+- <code>GlobalSEO</code> - Country-specific SEO with customized title/description
+- <code>InvalidCountrySelector</code> - Fallback for invalid countries</p>
+<hr />
+<h3 id="country-blog-listing-countryblogindexjsx">Country Blog Listing (<code>/[country]/blog/index.jsx</code>)<a class="headerlink" href="#country-blog-listing-countryblogindexjsx" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/{country}/blog</code>
+<strong>Purpose:</strong> Country-specific blog listing
+<strong>Sanity Data Used:</strong>
+- All published blogs
+- Related FAQs
+- Country validation</p>
+<hr />
+<h3 id="country-blog-posts-countryblogslugjsx">Country Blog Posts (<code>/[country]/blog/[...slug].jsx</code>)<a class="headerlink" href="#country-blog-posts-countryblogslugjsx" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/{country}/blog/{slug}</code>
+<strong>Purpose:</strong> Country-specific blog post pages
+<strong>Sanity Data Used:</strong>
+- Specific blog content
+- Related articles
+- Related FAQs
+- Country validation</p>
+<p><strong>Components:</strong>
+- <code>SimpleSEO</code> - Generates hreflang based on blog countries/language with proper country URL structure</p>
+<hr />
+<h3 id="country-feature-pages">Country Feature Pages<a class="headerlink" href="#country-feature-pages" title="Permanent link">&para;</a></h3>
+<p>All feature pages are replicated under <code>/{country}/</code>:</p>
+<h4 id="countryfeature-pricingjsx"><code>/{country}/feature-pricing.jsx</code><a class="headerlink" href="#countryfeature-pricingjsx" title="Permanent link">&para;</a></h4>
+<h4 id="countryfeature-play-soccer-gamesjsx"><code>/{country}/feature-play-soccer-games.jsx</code><a class="headerlink" href="#countryfeature-play-soccer-gamesjsx" title="Permanent link">&para;</a></h4>
+<h4 id="countryfeature-how-it-worksjs"><code>/{country}/feature-how-it-works.js</code><a class="headerlink" href="#countryfeature-how-it-worksjs" title="Permanent link">&para;</a></h4>
+<h4 id="countryfeature-host-soccer-gamesjs"><code>/{country}/feature-host-soccer-games.js</code><a class="headerlink" href="#countryfeature-host-soccer-gamesjs" title="Permanent link">&para;</a></h4>
+<h4 id="countrysoccer-venuesindexjsx"><code>/{country}/soccer-venues/index.jsx</code><a class="headerlink" href="#countrysoccer-venuesindexjsx" title="Permanent link">&para;</a></h4>
+<p><strong>Sanity Data:</strong> Same as global versions (static content)
+<strong>Purpose:</strong> Localized versions of feature pages</p>
+<hr />
+<h2 id="location-based-pages-countrycity">Location-Based Pages (<code>/[country]/[city]</code>)<a class="headerlink" href="#location-based-pages-countrycity" title="Permanent link">&para;</a></h2>
+<h3 id="city-venues-listing-countrycityvenuesindexjsx">City Venues Listing (<code>/[country]/[city]/venues/index.jsx</code>)<a class="headerlink" href="#city-venues-listing-countrycityvenuesindexjsx" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/{country}/{city}/venues</code>
+<strong>Purpose:</strong> List all venues in a specific city
+<strong>Sanity Data Used:</strong>
+- All active venues in the city
+- City information and details
+- Country validation</p>
+<p><strong>Examples:</strong>
+- <code>/ca/toronto/venues</code> - All venues in Toronto, Canada
+- <code>/ba/rio-de-janeiro/venues</code> - All venues in Rio de Janeiro, Bosnia</p>
+<hr />
+<h3 id="individual-venue-pages-countrycityvenuespitchjsx">Individual Venue Pages (<code>/[country]/[city]/venues/[pitch].jsx</code>)<a class="headerlink" href="#individual-venue-pages-countrycityvenuespitchjsx" title="Permanent link">&para;</a></h3>
+<p><strong>Route:</strong> <code>/{country}/{city}/venues/{venue-slug}</code>
+<strong>Purpose:</strong> Detailed information about a specific venue
+<strong>Sanity Data Used:</strong>
+- Specific venue details
+- Related venues in the city
+- Country validation</p>
+<p><strong>Examples:</strong>
+- <code>/ca/toronto/venues/cn-tower-sports-complex</code> - Specific venue in Toronto
+- <code>/ba/rio-de-janeiro/venues/ballsports-polson-pier</code> - Specific venue in Rio de Janeiro</p>
+<p><strong>Venue Data Structure:</strong>
+- Venue name, description, images
+- Location coordinates (geopoint)
+- General information and facilities
+- Status (active/inactive/maintenance)
+- City and country relationships</p>
+<hr />
+<h2 id="static-generation-strategy">Static Generation Strategy<a class="headerlink" href="#static-generation-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="getstaticpaths">getStaticPaths<a class="headerlink" href="#getstaticpaths" title="Permanent link">&para;</a></h3>
+<p><strong>Country Routes:</strong>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Uses getCountryStaticPaths() to generate paths for all countries</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nx">paths</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;/ca&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/au&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/us&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/uk&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/nz&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">...]</span>
+</span></code></pre></div></p>
+<p><strong>Blog Routes:</strong>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Combines countries with blog slugs</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nx">paths</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="s1">&#39;/ca/blog/soccer-tips&#39;</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="s1">&#39;/au/blog/soccer-tips&#39;</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="s1">&#39;/us/blog/soccer-tips&#39;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">...</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">]</span>
+</span></code></pre></div></p>
+<h3 id="getstaticprops">getStaticProps<a class="headerlink" href="#getstaticprops" title="Permanent link">&para;</a></h3>
+<p><strong>Data Fetching Pattern:</strong>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">blogs</span><span class="p">,</span><span class="w"> </span><span class="nx">testimonials</span><span class="p">,</span><span class="w"> </span><span class="nx">faqs</span><span class="p">,</span><span class="w"> </span><span class="nx">locationData</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">BlogAPI</span><span class="p">.</span><span class="nx">getRecentBlogs</span><span class="p">(</span><span class="mf">3</span><span class="p">),</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">TestimonialAPI</span><span class="p">.</span><span class="nx">getTestimonials</span><span class="p">(</span><span class="mf">5</span><span class="p">),</span><span class="w"> </span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nx">FaqAPI</span><span class="p">.</span><span class="nx">getFaqs</span><span class="p">(</span><span class="mf">6</span><span class="p">),</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nx">CityAPI</span><span class="p">.</span><span class="nx">getAllData</span><span class="p">()</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">]);</span>
+</span></code></pre></div></p>
+<hr />
+<h2 id="seo-internationalization">SEO &amp; Internationalization<a class="headerlink" href="#seo-internationalization" title="Permanent link">&para;</a></h2>
+<h3 id="global-pages_1">Global Pages<a class="headerlink" href="#global-pages_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Canonical:</strong> <code>https://neverft.com{path}</code></li>
+<li><strong>Hreflang:</strong> Generated for all countries</li>
+<li><strong>Language:</strong> Always 'en'</li>
+</ul>
+<h3 id="country-pages">Country Pages<a class="headerlink" href="#country-pages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Canonical:</strong> <code>https://neverft.com/{country}{path}</code></li>
+<li><strong>Hreflang:</strong> Based on blog.countries or fallback to all countries</li>
+<li><strong>Language:</strong> From blog.language or default 'en'</li>
+</ul>
+<h3 id="blog-posts">Blog Posts<a class="headerlink" href="#blog-posts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Dynamic hreflang:</strong> Uses blog's countries array and language field</li>
+<li><strong>Country targeting:</strong> Blog can target specific countries or be global</li>
+<li><strong>URL structure:</strong> Always <code>/{country}/blog/{slug}</code> for SEO consistency</li>
+</ul>
+<hr />
+<h2 id="data-flow-summary">Data Flow Summary<a class="headerlink" href="#data-flow-summary" title="Permanent link">&para;</a></h2>
+<h3 id="homepage-flow">Homepage Flow<a class="headerlink" href="#homepage-flow" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>User visits / or /{country}
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>↓
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>getStaticProps fetches: blogs, testimonials, faqs, countries
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>↓  
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>GlobalSEO generates hreflang for all countries
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>↓
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Landing component renders with fetched data
+</span></code></pre></div>
+<h3 id="blog-post-flow">Blog Post Flow<a class="headerlink" href="#blog-post-flow" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>User visits /{country}/blog/{slug}
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>↓
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>validateCountryAndGetData() validates country
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>↓
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>BlogAPI.getBlogBySlug() fetches post content
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>↓
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>SimpleSEO generates hreflang based on post.countries &amp; post.language
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>↓
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>BlogSingle component renders with post data
+</span></code></pre></div>
+<h3 id="static-generation-flow">Static Generation Flow<a class="headerlink" href="#static-generation-flow" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Build time
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>↓
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>getCountryStaticPaths() fetches countries from Sanity
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>↓
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>BlogAPI.getBlogPaths() fetches blog slugs from Sanity
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>↓
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>Generates all possible /{country}/{page} combinations
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>↓
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>Each page fetches required Sanity data during build
+</span></code></pre></div>
+<hr />
+<h2 id="excluded-pages-not-in-sitemap">Excluded Pages (Not in Sitemap)<a class="headerlink" href="#excluded-pages-not-in-sitemap" title="Permanent link">&para;</a></h2>
+<p>The application has many additional pages for authenticated users that are excluded from public sitemaps:</p>
+<ul>
+<li><code>/dashboard</code> - User dashboard</li>
+<li><code>/profile/*</code> - User profile pages  </li>
+<li><code>/community/*</code> - Community features</li>
+<li><code>/match/*</code> - Game matching system</li>
+<li><code>/tournament/*</code> - Tournament system</li>
+<li><code>/teams/*</code> - Team management</li>
+<li><code>/host/*</code> - Host-specific features</li>
+<li>And many more...</li>
+</ul>
+<p>These pages use various Sanity data but are part of the authenticated application experience, not the public marketing site.</p>
+<h2 id="key-routing-principles">Key Routing Principles<a class="headerlink" href="#key-routing-principles" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Country-first approach:</strong> Most content is country-specific</li>
+<li><strong>SEO optimization:</strong> Proper hreflang and canonical URLs</li>
+<li><strong>Static generation:</strong> All public pages are statically generated</li>
+<li><strong>Data consistency:</strong> Same data structure across global and country pages</li>
+<li><strong>Fallback handling:</strong> Invalid countries redirect to country selector</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fac441b0.min.js"></script>
+      
+    
+  </body>
+</html>
